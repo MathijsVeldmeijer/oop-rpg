@@ -1,5 +1,9 @@
 <?php
 
+namespace Game\Characters;
+
+trait TrtCharacter
+{
 class Character
 {
 
@@ -10,16 +14,18 @@ class Character
         public $role,
         public $defence = 5,
         public $range = 1
-    ){    }
+    )
+    {
+    }
 
     public function displayStats()
     {
-        return "name: ". $this->name ."<br>".
-            "current health: ". $this->health. "<br>".
-            "attack: ". $this->attack. "<br>".
-            "defence: ". $this->defence. "<br>".
-            "range: ". $this->range. "<br>".
-            "class: ". $this->role. "<br>";
+        return "name: " . $this->name . "<br>" .
+            "current health: " . $this->health . "<br>" .
+            "attack: " . $this->attack . "<br>" .
+            "defence: " . $this->defence . "<br>" .
+            "range: " . $this->range . "<br>" .
+            "class: " . $this->role . "<br>";
 
     }
 
@@ -35,6 +41,7 @@ class Character
 
 }
 
+require_once "autoload.php";
 
 $hero = new Character(
     name: "Hero",
@@ -47,10 +54,11 @@ $hero2 = new Character(
     name: "Jordan",
     health: 45,
     attack: 20,
-    role:"barbarian",
+    role: "barbarian",
     defence: 10,);
 
 $char03 = new Character("Jake", 32, 28, 6, 6, "ranger");
 
 $char03 = new Character("Dasce", 50, 10, 23, 1, "tank");
 
+}

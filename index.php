@@ -1,8 +1,21 @@
 <?php
-require_once "Character.php";
 
-//echo "<pre>";
-//var_dump($hero);
-//echo $hero->setHealth(10);
+require_once "autoload.php";
+//require_once "Character.php";
+
+
+//echo $hero2->displayStats();
+
+
+echo  "<pre>";
+
+//$battle = new Battle;
+
+use TrtCharacter;
+
 echo $hero->displayStats();
-echo $hero2->displayStats();
+
+$fighter1 = $hero;
+$fighter2 = $hero2;
+
+use Game\Combat\Battle;
