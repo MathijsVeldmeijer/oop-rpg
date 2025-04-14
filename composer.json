@@ -1,0 +1,14 @@
+{
+  "name": "game/oop-rpg",
+  "description": "Een RPG-game met objectgeoriënteerde PHP",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Mathijs Veldmeijer",
+      "email": "mrveldmeijer@gmail.com"
+    }
+  ],
+  "require": {
+  }
+}

@@ -11,10 +11,10 @@
 spl_autoload_register();
 
 spl_autoload_register(function ($className) {
-    $parts = explode('//', $className);
+    $parts = explode('\\', $className);
     $className = end($parts);
 
-    require_once $className. '.php';
+    require_once 'src/'. $className. '.php';
 
 });
 
