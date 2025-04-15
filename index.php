@@ -56,4 +56,14 @@ foreach ($hero->inventory->getItems() as $item) {
 $newBattle = new Battle();
 $newBattle->startFight($hero, $hero2);
 
+//heal
+$hero->setHealth($hero->getMaxHealth());
+$hero2->setHealth($hero2->getMaxHealth());
+
+$newBattle = new Battle();
+$newBattle->startFight($hero, $hero2);
+
+// restore health
+
+
 

@@ -15,6 +15,7 @@ class Battle
     private string $breaklog;
     private int $maxRounds = 7;
     private int $roundNumber = 1;
+    private int $damage;
 
     public function getBattleLog(): string
     {
@@ -53,18 +54,19 @@ class Battle
 
             // fighter1 turn
             echo "<br>" . $fighter1->getName() . "'s turn. <br>";
-            $damage = max(0, $fighter1->getAttack() - $fighter2->getDefense());
-            $fighter2->takeDamage($damage);
-            echo $fighter1->getName() . " hits " . $fighter2->getName() . " for " . $damage . " damage. 
-            <br>Remaining health: ". $fighter2->getMaxHealth(). "/" . $fighter2->getHealth() . ". <br><br><br>";
+            $this->damage = $this->calculateDamage($fighter1, $fighter2);
+            $fighter2->takeDamage($this->damage);
+            $this->logAttack($fighter1, $fighter2, $this->damage);
+            echo $this->battlelog;
+
 
             // fighter2 turn
             if ($fighter2->getHealth() > 0) {
                 echo "<br>" . $fighter2->getName() . "'s turn. <br>";
-                $damage = max(0, $fighter2->getAttack() - $fighter1->getDefense());
-                $fighter1->takeDamage($damage);
-                echo $fighter2->getName() . " hits " . $fighter1->getName() . " for " . $damage . " damage. 
-                <br>Remaining health: ". $fighter1->getMaxHealth(). " / " . $fighter1->getHealth() . ". <br><br>";
+                $this->damage = $this->calculateDamage($fighter2, $fighter1);
+                $fighter1->takeDamage($this->damage);
+                $this->logAttack($fighter2, $fighter1, $this->damage);
+                echo $this->battlelog;
             } else {
                 echo $breaklog;
                 echo $fighter2->getName() . " has been defeated in battle. <br>" . $fighter1->getName() . " is victorious! <br>";
@@ -97,7 +99,21 @@ class Battle
 
         echo "<br><br>>>----------------------------------------<<<<br><br>new max rounds: "
             . $this->maxRounds . "<br><br>>>----------------------------------------<<<<br><br>";
-
+        $this->logAttack($fighter1, $fighter2, $this->calculateDamage($fighter1, $fighter2) );
+        echo $this->battlelog;
         $this->startFight($fighter1, $fighter2);
+    }
+
+    private function calculateDamage($attacker, $defender): int
+    {
+        $newDamage = max(0,(rand(70, 100) / 100) * ($attacker->getAttack() - $defender->getDefense()));
+        return round($newDamage);
+    }
+
+    private function logAttack($attacker, $defender, int $damage): void
+    {
+      $this->battlelog = $attacker->getName(). " hits ". $defender->getName(). " for ". $damage. " damage.
+            <br>".$defender->getName() ."'s health: ".  $defender->getHealth().  " / ". $defender->getMaxHealth()
+            . ".<br><br><br>";
     }
 }
